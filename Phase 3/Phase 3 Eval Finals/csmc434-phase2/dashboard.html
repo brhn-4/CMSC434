@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body onload="onLoadDashBoard()">
+    <div class="container">
+        <div class="scrollable">
+            <img src="./Pilates-amico.svg" class="splash" />
+            <h2 style="text-align: center; margin: 25px;" id="nameDisplay">Welcome</h2>
+
+            <div id="calorieTrack" class="calorieTrack">
+                <div class="calCount"><span class="label">Calories To Go</span><span id="calTot" class="calTot"></span></div>
+                <div class="calorieChart" id="calorieChart"></div>
+            </div>
+
+            <div id="waterTrack" class="calorieTrack">
+                <div class="calCount"><span class="label">Water To Go</span><span id="waterTot" class="calTot"></span></div>
+                <div class="calorieChart" id="waterChart"></div>
+            </div>
+            
+            <div id="weightGoalProgress">
+                <p id="weightProgressMessage" style="text-align: center;"></p>
+                <progress id="weightProgress" value="0" max="100"></progress>
+            </div>
+            
+            <p style="text-align: center;">Your Weight Over Time</p>
+            <canvas id="myCanvas" class="chart" title="Your Weight Over Time" width="466" height="300" style="border:1px solid black; border-radius: 25px; text-align: center;">Your Browser Does Not Support Canvas</canvas>    
+
+
+            <div id="tabbar" class="tabbar">
+                <span class="tabBack active" onclick="loadDashboard()"><img src="./icons/home.svg" class="tabImg">
+                    <div class="bar"></div>
+                </span>
+                <span class="tabBack" onclick="loadCulinary()"><img src="./icons/plate.svg" class="tabImg"></span>
+                <span class="tabBack" onclick="loadFitness()"><img src="./icons/weight.svg" class="tabImg"></span>
+                <span class="tabBack" onclick="loadProfile()"><img src="./icons/user.svg" class="tabImg"></span>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>
+
+<script src="scripts.js"></script>

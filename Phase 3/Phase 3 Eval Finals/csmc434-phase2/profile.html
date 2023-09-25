@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <title>Profile</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body onload="loadProfileUserInfo()">
+    <div class="container">
+        <div class="scrollable">
+            <h2 style="text-align: center; padding-top: 20px;" id="nameDisplay">Profile</h2><br>
+            <fieldset class="profileInfoBlock">
+                <legend>
+                    <strong>Profile Information</strong>
+                </legend>
+
+                <div class="inputGroup row">
+                    <label>Name: </label><input placeholder="Name" type="text" id="userName"/>
+                </div>
+                <div class="inputGroup row">
+                    <label>Age: </label><input placeholder="0" type="number" id="userAge" step="1" min="1"
+                        max="125" />
+                </div>
+                <div class="inputGroup row">
+                    <label>Height (Inches): </label><input placeholder="0" type="number" id="userHeight" step="1" min="1"
+                        max="100" /><br>
+                </div>
+                <div class="inputGroup row">
+                    <label>Weight (Pounds): </label><input placeholder="0" type="number" id="userWeight" step="1" min="1"
+                        max="600" /><br>
+                </div>
+                <div class="inputGroup row">
+                    <label>Target Weight (Pounds): </label><input placeholder="0" type="number" id="userTargetWeight" step="1" min="1" max="600"/>
+                    <br>
+                </div>
+                <div class="inputGroup row">
+                    <label>Activity Level: </label>
+                    <select name="activity" id="activity" >
+                        <option value="" selected="true" disabled="disabled">Select Activity Level</option>
+                        <option value="light">Lightly Active</option>
+                        <option value="moderate">Moderately Active</option>
+                        <option value="very">Very Active</option>
+                    </select>
+                </div>
+
+                <div class="inputGroup row">
+                    <label>Gender: </label>
+                    <select name="gender" id="userGender">
+                        <option value="" selected="true" disabled="disabled">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="inputGroup row">
+                    <label>Body Mass Index: </label><input placeholder="0" type="number" id="userBMI" step="1" min="1" max="600" readonly style="color: gray;"/>
+                    <br>
+                </div>
+                <hr>
+                <button class="red" type="button" value="Save" style="float: right;"
+                    onclick="saveProfileInfo()">Save</button>
+            </fieldset>
+            <p id="successMessage" style="text-align: center;"></p>
+        </div>
+        <button class="button" value="clearLocalStorage" onclick="localStorage.clear()">Clear Local Storage</button>
+        <div id="tabbar" class="tabbar">
+            <span class="tabBack" onclick="loadDashboard()"><img src="./icons/home.svg" class="tabImg"></span>
+            <span class="tabBack" onclick="loadCulinary()"><img src="./icons/plate.svg" class="tabImg"></span>
+            <span class="tabBack" onclick="loadFitness()"><img src="./icons/weight.svg" class="tabImg"></span>
+            <span class="tabBack active" onclick="loadProfile()"><img src="./icons/user.svg" class="tabImg">
+                <div class="bar"></div>
+            </span>
+        </div>
+    </div>
+</body>
+
+<script src="scripts.js"></script>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Culinary</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body onload="refreshList()">
+    <div class="container">
+        <div class="scrollable">
+            <h2 style="text-align: center; margin: 25px;">Your Food Diary</h2>
+            <form class="foodInput">
+                <div style="display:flex; flex-flow:row; align-items:center;">
+                    <div class="inputGroup">
+                        <label for="foodName">What Did You Eat?</label>
+                        <input type="text" class="foodName" id="foodName" placeholder="Food Name">
+                    </div>
+                    <div class="inputGroup">
+                        <label for="calories">Calories</label>
+                        <input type="number" class="calories" id="calories" placeholder="1000">
+                    </div>
+                </div>
+                <input type="button" class="submitFood" id="submitFood" value="Enter Food" onclick="enterFood()"><br>
+            </form>
+
+            <div class="listOfFood">
+                <ul id="foodList" class="foodList">
+                </ul>
+            </div>
+
+            <div class="calTracker">
+                <div class="stat"><b>Your Daily Calorie Goal</b> <span id="calGoal" class="nums"></span></div>
+                <div class="stat"><b>Total Calories Consumed Today</b> <span id="calTotal" class="nums"></span></div>
+                <div class="stat"><b>Calories Left</b> <span id="calLeft" class="nums"></span></div>
+            </div>
+
+            <form class="waterInput">
+                <div style="display:flex; flex-flow:row; align-items:center; text-align: center;">
+                    <div class="inputGroup">
+                        <label for="foodName">How Much Water Did You Drink? (Oz)</label>
+                        <input type="number" class="water" id="water" placeholder="100" style="margin-left: auto; margin-right: auto;">
+                    </div>
+                </div>
+                <input type="button" class="submitFood" id="submitFood" value="Enter Water" onclick="enterWater()"><br>
+            </form>
+
+            <div class="waterTracker">
+                <div class="stat"><b>Your Daily Water Goal (Oz)</b> <span id="waterGoal" class="nums"></span></div>
+                <div class="stat"><b>Total Water Consumed Today (Oz)</b> <span id="waterTotal" class="nums"></span></div>
+                <div class="stat"><b>Water Left (Oz)</b> <span id="waterLeft" class="nums"></span></div>
+            </div>
+
+        </div>
+
+        <div id="tabbar" class="tabbar">
+            <span class="tabBack" onclick="loadDashboard()"><img src="./icons/home.svg" class="tabImg"></span>
+            <span class="tabBack active" onclick="loadCulinary()"><img src="./icons/plate.svg" class="tabImg">
+                <div class="bar"></div>
+            </span>
+            <span class="tabBack" onclick="loadFitness()"><img src="./icons/weight.svg" class="tabImg"></span>
+            <span class="tabBack" onclick="loadProfile()"><img src="./icons/user.svg" class="tabImg"></span>
+        </div>
+    </div>
+
+</body>
+
+<script src="scripts.js"></script>

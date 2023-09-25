@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <title>Fitness</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+        <div class="container">
+                <div class="scrollable">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/5.15.3/css/all.min.css">
+
+
+                        <h2 style="text-align: center; margin: 25px;">How would you like to workout today?</h2>
+
+                        <form id="fitnessInput">
+                                <div class="inputGroup">
+                                        <label for="fitness-level">Difficulty Level:</label>
+                                        <select id="fitness-level" name="fitness-level">
+                                                <option value="beginner">Beginner</option>
+                                                <option value="intermediate">Intermediate</option>
+                                                <option value="advanced">Advanced</option>
+                                        </select>
+                                </div>
+
+                                <div class="goalGroup">
+                                        <label class="title" for="exercise-goal">Exercise Goal:</label>
+                                        <div style="display:flex; justify-content: center; margin-top:10px">
+                                                <div class="inputGroup row">
+                                                        <input type="radio" id="gain-muscle" name="exercise-goal"
+                                                        value="gain-muscle">
+                                                        <label for="gain-muscle">Gain Muscle</label>
+                                                </div>
+                                                <div class="inputGroup row">
+                                                        <input type="radio" id="lose-weight" name="exercise-goal"
+                                                        value="lose-weight">
+                                                        <label for="lose-weight">Lose Weight</label>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="inputGroup">
+                                        <label for="time-available">Time Available:</label>
+                                        <input style="margin-top:20px;" class="slider" type="range" id="time-available" name="time-available" min="5" max="120"
+                                                step="5">
+                                        <p id="time-value"></p>
+                                </div>
+                                <input class="red" type="submit" value="Get Workouts Now">
+                        </form>
+
+                        <div id="exercises"></div>
+
+                        <fieldset class="profileInfoBlock">
+                                <legend>
+                                <strong>Mental Health Check In</strong>
+                                </legend>
+                                <div class="inputGroup row">
+                                <label>How You Are Feeling? </label>
+                                <select name="mentalHealthSelection" id="mentalHealthSelection" >
+                                        <option value="" selected="true" disabled="disabled">Select How You Are Feeling</option>
+                                        <option value="happy">Happy</option>
+                                        <option value="anxious">A little Stressed/Anxious</option>
+                                        <option value="veryStressed">Very Stressed/Anxious</option>
+                                </select>
+                                </div>
+                                <hr>
+                                <button class="red" type="button" value="saveMentalHealth" onclick="mentalHealthRecs()">Submit</button>
+                        </fieldset>
+
+                        <p id="mentalHealthMessage" style="text-align: center;"></p>
+
+                        <script>
+                                var slider = document.getElementById("time-available");
+                                var curValue = document.getElementById("time-value");
+                                curValue.innerHTML = slider.value + " minutes";
+                                slider.oninput = function () {
+                                        curValue.innerHTML = this.value + " minutes";
+                                }
+
+                                document.querySelector('form').addEventListener('submit', function (event) {
+                                        event.preventDefault();
+                                        var fitnessLevel = document.getElementById('fitness-level').value;
+                                        var gainMuscle = document.getElementById('gain-muscle').checked;
+                                        var loseWeight = document.getElementById('lose-weight').checked;
+                                        var exerciseGoal = ""
+                                        if (gainMuscle) {
+                                                exerciseGoal = "gain-muscle";
+                                        } else if (loseWeight) {
+                                                exerciseGoal = "lose-weight";
+                                        } else {
+                                                alert("Please select an exercise goal before getting your workouts");
+                                                return;
+                                        }
+
+                                        var exercises = getExercises(fitnessLevel, exerciseGoal);
+                                        document.getElementById('exercises').innerHTML = '<h2>Recommended Exercises:</h2>' + exercises;
+                                        document.querySelector('form').style.display = 'none';
+
+                                        // Add back button
+                                        var backButton = document.createElement('button');
+                                        backButton.innerHTML = 'Back';
+                                        backButton.addEventListener('click', function () {
+                                                // Show the form
+                                                document.querySelector('form').style.display = 'block';
+
+                                                // Clear the selected exercise goal
+                                                document.querySelector('input[name="exercise-goal"]:checked').checked = false;
+
+                                                // Remove the back button and recommended exercises
+                                                document.getElementById('exercises').innerHTML = '';
+                                                document.getElementById('exercises').removeChild(backButton);
+                                        });
+                                        document.getElementById('exercises').style.visibility = 'visible';
+                                        document.getElementById('exercises').appendChild(backButton);
+                                });
+
+                                // Function to get relevant exercises based on user selections
+                                function getExercises(fitnessLevel, exerciseGoal) {
+                                        var exercises = '';
+                                        let times = [
+                                                [0.2, 0.4, 0.2, 0.2],
+                                                [0.5, 0.2, 0.1, 0.2],
+                                                [0.4, 0.2, 0.3, 0.1],
+                                                [0.3, 0.3, 0.2, 0.2],
+                                                [0.25, 0.25, 0.25, 0.25],
+                                                [0.3, 0.1, 0.4, 0.2]
+                                        ]
+                                        let x = document.getElementById('time-available').value;
+                                        if (fitnessLevel === 'beginner' && exerciseGoal === 'gain-muscle') {
+                                                exercises = `<ul><li>Push-Ups For ${times[0][0]*x} Minutes</li><li>Squats For ${times[0][1]*x} Minutes</li><li>Dumbell Curls For ${times[0][2]*x} Minutes</li><li>Pull-Ups For ${times[0][3]*x} Minutes</li></ul>`;
+                                        } else if (fitnessLevel === 'beginner' && exerciseGoal === 'lose-weight') {
+                                                exercises = `<ul><li>Walking For ${times[1][0]*x} Minutes</li><li>Jogging For ${times[1][1]*x} Minutes</li><li>Sit Ups For ${times[1][2]*x} Minutes</li><li>Wall Sits For ${times[1][3]*x} Minutes</li></ul>`;
+                                        } else if (fitnessLevel === 'intermediate' && exerciseGoal === 'gain-muscle') {
+                                                exercises = `<ul><li>Bench Press For ${times[2][0]*x} Minutes</li><li>Deadlifts For ${times[2][1]*x} Minutes</li><li>Dumbell Curls For ${times[2][2]*x} Minutes</li><li>Diamond Push-ups For ${times[2][3]*x} Minutes</li></ul>`;
+                                        } else if (fitnessLevel === 'intermediate' && exerciseGoal === 'lose-weight') {
+                                                exercises = `<ul><li>Cycling For ${times[3][0]*x} Minutes</li><li>Swimming For ${times[3][1]*x} Minutes</li><li>Treadmill Run For ${times[3][2]*x} Minutes</li><li>Jump Rope For ${times[3][3]*x} Minutes</li></ul>`;
+                                        } else if (fitnessLevel === 'advanced' && exerciseGoal === 'gain-muscle') {
+                                                exercises = `<ul><li>Barbell Curls For ${times[4][0]*x} Minutes</li><li>Shoulder Press For ${times[4][1]*x} Minutes</li><li>Lateral Pulldown For ${times[4][2]*x} Minutes</li><li>Pectoral Flys For ${times[4][3]*x} Minutes</li></ul>`;
+                                        } else if (fitnessLevel === 'advanced' && exerciseGoal === 'lose-weight') {
+                                                exercises = `<ul><li>Stair Climbing For ${times[5][0]*x} Minutes</li><li>High Intensity Sit Ups For ${times[5][1]*x} Minutes</li><li>1 Mile Run For ${times[5][2]*x} Minutes</li><li>Mountain Climbers For ${times[5][3]*x} Minutes</li></ul>`;
+                                        }
+
+                                        return exercises;
+                                }
+                        </script>
+
+
+
+
+                        <div id="tabbar" class="tabbar">
+                                <span class="tabBack" onclick="loadDashboard()"><img src="./icons/home.svg"
+                                                class="tabImg"></span>
+                                <span class="tabBack" onclick="loadCulinary()"><img src="./icons/plate.svg"
+                                                class="tabImg"></span>
+                                <span class="tabBack active" onclick="loadFitness()"><img src="./icons/weight.svg"
+                                                class="tabImg">
+                                        <div class="bar"></div>
+                                </span>
+                                <span class="tabBack" onclick="loadProfile()"><img src="./icons/user.svg" class="tabImg"></span>
+                        </div>
+                </div>
+        </div>
+</body>
+
+<script src="scripts.js"></script>

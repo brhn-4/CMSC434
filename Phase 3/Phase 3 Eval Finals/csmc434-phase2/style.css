@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto&display=swap');
+
+html {
+    background-color:lightgrey;
+}
+body {
+    font-size: 17pt;
+    font-family: 'Inter';
+}
+
+.scrollable {
+    overflow-y: scroll; height: calc(100% - 132px);
+    text-align: center;
+}
+
+/* Custom Button */
+
+button.button {
+    position: relative;
+    padding:10px 15px;
+    font-family: 'Inter';
+    font-weight:bold;
+    font-size:14px;
+    border:none;
+    background-color:white;
+    border-radius:4px;
+    width:200px;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    top: -30px;
+}
+button.button:active {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+button.red {
+    background-color:#d9514e;
+    border:none;
+    padding:10px 15px;
+    font-family: 'Inter';
+    font-weight:bold;
+    font-size:16px;
+    border-radius:4px;
+    cursor:pointer;
+    color:white;
+}
+
+/* Custom Select */
+select {
+    padding:10px 15px;
+    font-size:14px;
+    font-family: 'Inter';
+    font-weight:normal;
+    border:none;
+    appearance: none;
+    border: solid 2px lightgray;
+}
+
+.container {
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 500px;
+    height: 870px;
+    background-color: #79a8d7;
+    border: 1px solid black;
+    border-radius: 25px;
+    display:flex;
+    flex-flow:column;
+    overflow:hidden;
+}
+
+.splash {
+    width:50%;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tabbar {
+    position:absolute;
+    width:calc(100% - 40px);
+    bottom:0px;
+    margin-top:auto;
+    display: flex;
+    justify-content: space-around;
+    background-color:white;
+    padding:20px;
+    box-shadow:0px -6px 10px rgba(0,0,0,0.1);
+}
+
+
+.tab {
+    position: relative;
+    background-color: #d9514e;
+    border-radius: 25px;
+    height: 60px;
+    width: 120px;
+}
+
+.tabBack {
+    padding:15px;
+    border-radius: 15px;
+    position: relative;
+    text-align: center;
+    display:flex;
+    flex-flow:column;
+    align-items: center;
+    cursor:pointer;
+}
+
+.tabBack img {
+    width:40px;
+    height:40px;
+}
+
+.tabBack .bar {
+    width:30px;
+    height:6px;
+    background-color:#bbb;
+    border-radius:30px;
+    margin-top:5px;
+}
+
+.tabBack.active img {
+  filter: invert(0.5) sepia(1) saturate(10) hue-rotate(-44deg);
+}
+
+.tabImg {
+    margin: 5px;
+    position: relative;
+    width: 70px;
+    height: 70px;   
+    vertical-align: middle;
+}
+
+
+/* Dashboard CSS */
+.calorieTrack {
+    position:relative;
+    margin: 15px;
+    height: 100px;
+    padding: 15px;
+    background-color:white;
+    border-radius:4px;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+    display:flex;
+    align-items: center;
+}
+
+.calCount {
+    display:flex;
+    flex-flow:column;
+    margin-left:20px;
+}
+.calCount .label {
+    font-size:18px;
+}
+
+.calTot {
+    font-size:30px;
+    font-weight:bold;
+}
+.calTot p {
+    margin:0px;
+}
+
+.calorieChart {
+    margin-top: 0px;
+    display: block;
+    position: absolute;
+    right:30px;
+    top:15px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+}
+
+#weightGoalProgress {
+    margin: 15px;
+    height: 150px;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 15px;
+    text-align: center;
+}
+
+
+
+/* Culinary CSS */
+.submitFood {
+    background-color:#d9514e;
+    border:none;
+    padding:10px 15px;
+    font-family: 'Inter';
+    font-weight:bold;
+    font-size:16px;
+    border-radius:4px;
+    cursor:pointer;
+    color:white;
+}
+#foodList {
+    margin:0px;
+    padding:0px;
+    overflow-y: scroll;
+}
+
+#foodList li {
+    margin-bottom:5px;
+    padding: 20px;
+    list-style: none;
+    border-bottom: solid 1px rgb(173, 173, 173);
+}
+
+.listOfFood {
+    margin:20px;
+    background-color:white;
+    box-shadow:0px 4px 10px rgba(0,0,0,0,.2);
+    border-radius: 4px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.calTracker {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius:4px;
+    font-size:18px;
+    display:flex;
+    flex-flow:column;
+}
+
+.calTracker .stat {
+    display:flex;
+}
+.waterTracker {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius:4px;
+    font-size:18px;
+    display:flex;
+    flex-flow:column;
+}
+
+.waterTracker .stat {
+    display:flex;
+}
+
+.foodInput {
+    background-color: white;
+    display:flex;
+    flex-flow:column;
+    align-items: center;
+    padding: 20px;
+    margin:20px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    border-radius:4px;
+}
+
+.waterInput {
+    background-color: white;
+    display:flex;
+    flex-flow:column;
+    align-items: center;
+    padding: 20px;
+    margin:20px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    border-radius:4px;
+}
+
+.nums {
+    margin-left:auto;
+}
+
+.inputGroup {
+    display:flex;
+    flex-flow:column;
+    padding:10px;
+}
+
+.inputGroup.row {
+    flex-flow:row;
+    align-items: center;
+}
+
+.inputGroup label {
+    font-size:16px;
+    font-weight:bold;
+    margin:5px 5px;
+}
+
+.inputGroup input[type='text'], .inputGroup input[type='number'] {
+    font-family: 'Inter';
+    padding:10px 12px;
+    font-size:14px;
+    outline:none;
+    border:none;
+    border-radius: 4px;
+    margin-top:4px;
+    max-width:180px;
+    border:solid 2px lightgray;
+}
+.inputGroup input:focus {
+    border:solid 2px #d9514e;
+}
+
+.inputGroup input[type='number'] {
+    max-width:70px;
+}
+
+
+
+/* Profile CSS */
+.settingIcon {
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 50%;
+    padding: 50px;
+    scale: 10%;
+    position: absolute;
+    top: -250px;
+    right: -250px;
+}
+
+#settings{
+    text-align: center;
+    display:none;
+    background-color:white;
+    padding:15px;
+    margin:20px;
+    display:flex;
+    font-size:16px;
+    border-radius:4px;
+}
+
+.profileInfoBlock {
+    background-color:white;
+    border:solid 0px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    margin: 0px 15px;
+    border-radius: 4px;
+}
+.profileInfoBlock legend {
+    position: relative;
+    top:-5px;
+    background-color:white;
+    padding:10px;
+    font-size:14px;
+    border-radius:4px;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+}
+
+
+/* Fitness Styles */
+.slider {
+    -webkit-appearance: none;
+  appearance: none;
+  width: 100%; 
+  height: 10px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius:30px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #d9514e;
+    border-radius:30px;
+    cursor: pointer;
+  }
+
+#fitnessInput {
+    display:flex;
+    flex-flow:column;
+    padding:30px;
+    background-color:white;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    margin: 20px;
+    border-radius:4px;
+}
+
+input.red {
+    background-color:#d9514e;
+    border:none;
+    padding:10px 15px;
+    font-family: 'Inter';
+    font-weight:bold;
+    font-size:16px;
+    border-radius:4px;
+    cursor:pointer;
+    color:white;
+}
+
+.goalGroup {
+    padding:15px;
+    display:flex;
+    flex-flow:column;
+}
+.goalGroup label.title {
+    font-size:16px;
+    font-weight:bold;
+}
+
+.goalGroup .inputGroup label {
+    font-weight:normal;
+}
+
+input[type='radio'] ~ label { 
+    border:solid 2px lightgray;
+    border-radius:4px;
+    padding:10px 15px;
+    cursor:pointer;
+}
+
+input[type='radio'] {
+    appearance: none;
+}
+
+input[type='radio']:checked ~ label {
+    background-color:#79a8d7;
+    border:solid 2px #79a8d7;
+}
+
+#time-value {
+    font-size:20px;
+    text-align: center;
+}
+
+#exercises {
+    margin:20px;
+    padding:20px;
+    background-color:white;
+    border-radius:4px;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+}
+
+#exercises h2 {
+    margin:0px;
+    font-size:25px;
+}
+
+#exercises button {
+    font-family: 'Inter';
+    padding:10px 12px;
+    font-size:14px;
+    outline:none;
+    border:none;
+    border-radius: 4px;
+    margin-top:4px;
+    max-width:180px;
+    border:solid 2px transparent;
+}
