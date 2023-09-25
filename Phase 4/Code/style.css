@@ -1,0 +1,76 @@
+.club-table img {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+.club-table {
+    margin: auto;
+    align-items: center;
+    width: fit-content;
+}
+.club-table a{
+    text-align: center;
+    align-items: center;
+    border: 5px solid lightgray;
+    border-radius: 10px;
+    margin: auto;
+    display: inline-block;
+    width: 350px;
+    height: 225px;
+    background-color: white;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}
+.club-table a:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+.club-table td{
+    margin: auto;
+    width: fit-content;
+}
+.club-table tr {
+    margin-bottom: 10px;
+}
+  
+#myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+  
+  #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    box-sizing: border-box;
+  }
+  
+  #myTable th, #myTable td {
+    text-align: left;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+  
+  #myTable tr {
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+  }
+  
+  #myTable tr.header, #myTable tr:hover {
+    background-color: #f1f1f1;
+    box-sizing: border-box;
+  }
+  .club-table>a>h3{
+    color:black;
+  }
+
+ 
+  

@@ -1,0 +1,41 @@
+.jumpIcons>svg{
+    text-align: center;
+    height: 50px;
+    width:50px;
+
+}
+
+.jumpTitles{
+    text-align: center;
+    color: black;
+
+}
+#jumbotronRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch; /* Modify this line to stretch the items to equal height */
+    width: 100%;
+  }
+  
+.jumbotron {
+    background-color: rgba(0, 0, 0, 0.2); /* Set the jumbotron background color */
+    color: #fff; /* Set the jumbotron text color */
+   
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 20px; 
+  }
+  .jumbotron h2 {
+    /* Add your desired title styles here */
+    font-size: 20px; /* Example font size */
+    font-weight: bold; /* Example font weight */
+    text-decoration: underline;
+    margin-bottom: 20px; /* Example spacing below the title */
+    margin-top: 0;
+    white-space: nowrap;
+    text-align: left;
+  }

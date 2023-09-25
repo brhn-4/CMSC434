@@ -1,0 +1,48 @@
+#nav_g{
+    
+    background-color: #E5E5E5;
+    height: 160px;
+    padding-top: 50px;  
+    
+}
+#row2{
+    padding-top: 100px;
+   
+} 
+#navIconBar{
+    padding-top: 15px;
+    z-index:99;
+}
+#nav_g_col1{
+    position: absolute;
+    left: 5px;
+    top: 65px;
+}
+#nav_g_col3{
+    position: absolute;
+    right:5px;
+    top: 55px;
+}
+
+
+.navIcon{
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+
+#aboutBlurb1{
+    text-align: left;
+    font-size:xx-small;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#aboutBlurb2{
+    text-align: left;
+    font-size: xx-small;
+}
+#aboutBox{
+    float: right;
+    padding-top: 10px;
+}
