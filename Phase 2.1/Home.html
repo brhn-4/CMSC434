@@ -1,0 +1,179 @@
+<html>   
+  <head>
+      <meta charset="UTF-8" />
+      <link rel='stylesheet' href="./home.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      
+      <link rel='stylesheet' href="./navbar.css">
+      
+      <script src="./nav.js"></script>
+      <style>
+        body {
+          font-family:  'Open Sans';
+        }head {
+          font-family: 'Open Sans';
+        }
+      </style>
+      <title>Home</title>      
+ 
+
+  
+
+  <!-- START OF TOP BANNER-->
+  <div class = 'container'>
+    <div class ='row' id="row2">
+
+      <!-- Grey NavBar-->
+      <nav class="navbar navbar-dark navbar-fixed-top"  id = 'nav_g' >
+
+        <div class = 'container'>
+          <div class='row'>
+            <div class = 'col' id = 'nav_g_col1' >
+              <div >
+                <img src="./Images/cs_logo.png" height="50px" width="250px" alt="umd_cs_logo">
+              </div>
+              <div id = 'navIconBar'>
+                <a  class = 'navIcon' onclick="notDoneYet()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                  </svg>
+                </a>
+    
+                <a href = "Home.html" class = 'navIcon'>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                  </svg>
+                </a>
+    
+                <a class = 'navIcon' onclick="notDoneYet()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                  </svg>
+                </a>
+    
+              </div>
+            </div>
+            <div class = col id = nav_g_col2></div>
+            <div class = 'col' id = 'nav_g_col3' >
+              <div id = 'aboutBox'>
+                <p id = "aboutBlurb1">
+                  Brendan Iribe Center for Computer <br> Science and Engineering
+                </p>
+                
+                <p id = 'aboutBlurb2'>
+                  8125 Paint Branch Drive, College Park MD 20742<br>
+                
+                  P: 301.405.2662 
+                </p id = 'aboutBox'>  
+              </div>
+            </div>
+        
+          </div>
+
+          
+        </div>
+      </nav>
+    </div>
+
+    <!--Red NavBar-->
+    <nav class="navbar navbar-dark  navbar-fixed-top " style="background-color: #E21833;">
+      <div class>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="https://www.umd.edu/" style='color:white'>University of Maryland</a>
+        </div>    
+      </div>
+    </nav>
+   
+  </div>
+  <div style="padding-top:100px"></div> 
+
+  <!-- END OF TOP BANNER-->
+
+  </head>
+
+<!-- HEAD/BODY-->
+
+  <body style="padding-left: 5%; padding-right:5%">
+    
+
+<!-- START OF JUMBOTRON (jumbo/container/row/col/a/svg)-->
+    <div class="jumbotron jumbotron-fluid" style=" float:center; background-color:#E5E5E5">
+      <div class=" container">
+
+        <div class = 'row' style="text-align:center">
+          <div class = 'col'>
+            <a href=map.html class = 'jumpIcons'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="red" class="bi bi-map" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>
+              </svg>
+              <p class ='jumpTitles'>Map</p>
+            </a>
+            
+          </div>
+
+          <div class = 'col'>
+            <a href=Directory.html class = 'jumpIcons'>
+              <svg xmlns="http://www.w3.org/2000/svg"  fill="red" class="bi bi-person-rolodex" viewBox="0 0 16 16">
+                <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1H1Zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1V2Z"/>
+              </svg>
+              <p class ='jumpTitles'>Directory</p>
+            </a>
+            
+          </div>
+
+          <div class = 'col'>
+            <a href="./phase2Calendar.html" class = 'jumpIcons'>
+              <svg xmlns="http://www.w3.org/2000/svg"  fill="red" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+              </svg>
+              <p class ='jumpTitles'>Event Calendar</p>
+            </a>
+           
+          </div>
+        </div>
+
+
+        <hr class="my-4">
+
+
+        <div class = 'row' style="text-align:center">
+          <div class = 'col'>
+            <a href=resources.html class = 'jumpIcons'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="red" class="bi bi-laptop" viewBox="0 0 16 16">
+                <path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5h11zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2h-11zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5z"/>
+              </svg>
+              <p class ='jumpTitles'>Resources</p>
+            </a>
+           
+          </div>
+
+          <div class = 'col' style="text-align:center">
+            <a href =OfficeHours.html class = 'jumpIcons'>
+              <svg  xmlns="http://www.w3.org/2000/svg"  fill="red" class="bi bi-people-fill" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              </svg>
+              <p class ='jumpTitles'>Office Hours</p>
+            </a>
+            
+          </div>
+
+          <div class = 'col'>
+            <a href="./ClubJumpPad.html" class = 'jumpIcons'>
+              <svg xmlns="http://www.w3.org/2000/svg"  fill="red" class="bi bi-suit-club" viewBox="0 0 16 16">
+                <path d="M8 1a3.25 3.25 0 0 0-3.25 3.25c0 .186 0 .29.016.41.014.12.045.27.12.527l.19.665-.692-.028a3.25 3.25 0 1 0 2.357 5.334.5.5 0 0 1 .844.518l-.003.005-.006.015-.024.055a21.893 21.893 0 0 1-.438.92 22.38 22.38 0 0 1-1.266 2.197c-.013.018-.02.05.001.09.01.02.021.03.03.036A.036.036 0 0 0 5.9 15h4.2c.01 0 .016-.002.022-.006a.092.092 0 0 0 .029-.035c.02-.04.014-.073.001-.091a22.875 22.875 0 0 1-1.704-3.117l-.024-.054-.006-.015-.002-.004a.5.5 0 0 1 .838-.524c.601.7 1.516 1.168 2.496 1.168a3.25 3.25 0 1 0-.139-6.498l-.699.03.199-.671c.14-.47.14-.745.139-.927V4.25A3.25 3.25 0 0 0 8 1zm2.207 12.024c.225.405.487.848.78 1.294C11.437 15 10.975 16 10.1 16H5.9c-.876 0-1.338-1-.887-1.683.291-.442.552-.88.776-1.283a4.25 4.25 0 1 1-2.007-8.187 2.79 2.79 0 0 1-.009-.064c-.023-.187-.023-.348-.023-.52V4.25a4.25 4.25 0 0 1 8.5 0c0 .14 0 .333-.04.596a4.25 4.25 0 0 1-.46 8.476 4.186 4.186 0 0 1-1.543-.298z"/>
+              </svg>
+              <p class ='jumpTitles'>Clubs</p>
+            </a>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- END OF JUMBOTRON-->
+
+  </body>
+</html>

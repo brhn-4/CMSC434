@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Interactive Building Map</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href="./navbar.css">
+	<script src="./nav.js"></script>
+    <style>
+	 body {
+		font-family:  'Open Sans';
+		  }head {
+			font-family: 'Open Sans';
+		  }
+      #map {
+        position: absolute;
+        width: 800px;
+        height: 600px;
+        background-size: contain;
+        background-repeat: no-repeat;
+		left: 0px;
+      }
+      .room {
+        position: absolute;
+        border: 1px solid black;
+        background-color: rgba(240,234,214,.85);
+        opacity: 1;
+        padding: 0px;
+        font-size: 10px;
+        z-index: 1;
+		width: 24px;
+		height: 14px;
+		border-radius: 50%;
+		left: 0px;
+		cursor: pointer;
+      }
+	  #description-box {
+			position: fixed;
+			bottom:2px;
+			left:2px;
+			background-color: #fff;
+			border: 2px solid #E21833;
+			padding: 10px;
+			display: none;
+			z-index: 999;
+			width: 200px;
+			height: 50px;
+		}
+      .hidden {
+        display: none;
+      }
+	  
+	  
+	  ul{
+        background: #f5f5f5;
+		list-style-type: none;
+		padding-left: 9px;
+		max-width: 300px;
+		cursor: pointer;
+		text-decoration: underline;
+	  }
+	  .selected {
+  border: 1px solid red;
+		}
+	  
+
+    </style>
+	
+  <!-- START OF TOP BANNER-->
+  <div class = 'container'>
+    <div class ='row' id="row2">
+
+      <!-- Grey NavBar-->
+      <nav class="navbar navbar-dark navbar-fixed-top"  id = 'nav_g' >
+
+        <div class = 'container'>
+          <div class='row'>
+            <div class = 'col' id = 'nav_g_col1' >
+              <div >
+                <img src="./Images/cs_logo.png" height="50px" width="250px" alt="umd_cs_logo">
+              </div>
+              <div id = 'navIconBar'>
+                <a  class = 'navIcon' onclick="notDoneYet()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                  </svg>
+                </a>
+    
+                <a href = "Home.html" class = 'navIcon'>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                  </svg>
+                </a>
+    
+                <a class = 'navIcon' onclick="notDoneYet()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                  </svg>
+                </a>
+    
+              </div>
+            </div>
+            <div class = col id = nav_g_col2></div>
+            <div class = 'col' id = 'nav_g_col3' >
+              <div id = 'aboutBox'>
+                <p id = "aboutBlurb1">
+                  Brendan Iribe Center for Computer <br> Science and Engineering
+                </p>
+                
+                <p id = 'aboutBlurb2'>
+                  8125 Paint Branch Drive, College Park MD 20742<br>
+                
+                  P: 301.405.2662 
+                </p id = 'aboutBox'>  
+              </div>
+            </div>
+        
+          </div>
+
+          
+        </div>
+      </nav>
+    </div>
+
+    <!--Red NavBar-->
+    <nav class="navbar navbar-dark  navbar-fixed-top " style="background-color: #E21833;">
+      <div class>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="https://www.umd.edu/" style='color:white'>University of Maryland</a>
+        </div>    
+      </div>
+    </nav>
+   
+  </div>
+  <div style="padding-top:100px"></div> 
+
+  <!-- END OF TOP BANNER-->
+
+  </head>
+  <body >
+    <h1>Interactive Building Map</h1>
+    <div>
+      <input type="text" id="search-input" placeholder="Search for a room">
+      <button id="search-button">Search</button>
+	  <ul id="suggestions-list"></ul>
+    </div>
+	<div>
+      <select id="floor-select">
+		<option value="ground-floor" data-image="./Images/ground-floor.png">Ground Floor</option>
+		<option value="first-floor" data-image="./Images/first-floor.png">Floor 1</option>
+		<option value="second-floor" data-image="./Images/second-floor.png">Floor 2</option>
+		<option value="third-floor" data-image="./Images/third-floor.png">Floor 3</option>
+		<option value="fourth-floor" data-image="./Images/fourth-floor.png">Floor 4</option>
+		<option value="fifth-floor" data-image="./Images/fifth-floor.png">Floor 5</option>
+      </select>
+    </div>
+    <div id="map"></div>
+	<div id="description-box"></div>
+    <script>
+	
+	//dim: 35x25
+	//♀♂
+	const rooms = [
+	  { name: "0116", floor: "ground-floor", x: 180, y: 395, description: "Engineering Robotics Lab" },
+	  { name: "0110", floor: "ground-floor", x: 230, y: 440, description: "Motion Capture Lab" },
+	  { name: "0108", floor: "ground-floor", x: 300, y: 470, description: "High Bay Flex Lab" },
+	  { name: "0102", floor: "ground-floor", x: 370, y: 490, description: "Robotics Cognitive Lab" },
+	  { name: "0324", floor: "ground-floor", x: 500, y: 100, description: "Collaborative Auditorium" },
+	  { name: "0318", floor: "ground-floor", x: 600, y: 100, description: "Large Tiered Collaborative Classroom" },
+	  { name: "BRG", floor: "ground-floor", x: 220, y: 280, description: "Mens Bathroom" },
+	  { name: "BRG", floor: "ground-floor", x: 285, y: 315, description: "Unisex Bathroom" },
+	  { name: "BRG", floor: "ground-floor", x: 240, y: 250, description: "Womens Bathroom" },
+	  
+	  //{ name: "1126", floor: "first-floor", x: 85, y: 20, description: "Student Study Room" },
+	  { name: "1138", floor: "first-floor", x: 120, y: 0, description: "Advisor Office A" },
+	  { name: "1140", floor: "first-floor", x: 157, y: 5, description: "Advisor Office A w/ Column" },
+	  { name: "1142", floor: "first-floor", x: 165, y: 32, description: "Advisor Office B w/ Column" },
+	  { name: "1144", floor: "first-floor", x: 185, y: 55, description: "Advisor Office B" },
+	  { name: "1146", floor: "first-floor", x: 172, y: 92, description: "Office A" },
+	  { name: "1150", floor: "first-floor", x: 220, y: 85, description: "Advising check-in" },
+	  { name: "1152", floor: "first-floor", x: 250, y: 100, description: "Office" },
+	  { name: "1154", floor: "first-floor", x: 270, y: 122, description: "Office" },
+	  { name: "1156", floor: "first-floor", x: 260, y: 170, description: "Undergraduate lounge" },
+	  //{ name: "1266", floor: "first-floor", x: 360, y: 220, description: "Tutoring center" },
+	  { name: "1254", floor: "first-floor", x: 510, y: 195, description: "Office" },
+	  { name: "1252", floor: "first-floor", x: 540, y: 180, description: "Office" },
+	  { name: "1250", floor: "first-floor", x: 560, y: 202, description: "Office" },
+	  { name: "1248", floor: "first-floor", x: 590, y: 187, description: "Office" },
+	  { name: "1246", floor: "first-floor", x: 605, y: 245, description: "H/M workshop: embedded systems, ossiloscopes, soldering" },
+	  { name: "1242", floor: "first-floor", x: 640, y: 250, description: "H/M workshop: special projects - photography" },
+	  { name: "1238", floor: "first-floor", x: 674, y: 255, description: "H/M workshop: special projects - 3D printing" },
+	  { name: "1231", floor: "first-floor", x: 675, y: 310, description: "H/M collaboration room" },
+	  { name: "1245", floor: "first-floor", x: 610, y: 287, description: "H/M workshop" },
+	  { name: "1223", floor: "first-floor", x: 605, y: 315, description: "H/M workshop: laser cutters" },
+	  { name: "1222", floor: "first-floor", x: 625, y: 355, description: "H/M workshop: metal shop" },
+	  { name: "1224", floor: "first-floor", x: 660, y: 360, description: "H/M workshop: textiles" },
+	  { name: "1220", floor: "first-floor", x: 590, y: 355, description: "H/M workshop: woodshop" },
+	  { name: "1214", floor: "first-floor", x: 558, y: 395, description: "Office" },
+	  { name: "1212", floor: "first-floor", x: 537, y: 415, description: "Office" },
+	  { name: "1210", floor: "first-floor", x: 516, y: 395, description: "Office" },
+	  { name: "1208", floor: "first-floor", x: 495, y: 415, description: "Huddle room" },
+	  { name: "1206", floor: "first-floor", x: 415, y: 415, description: "Huddle room" },
+	  { name: "1204", floor: "first-floor", x: 394, y: 395, description: "Huddle room" },
+	  { name: "1202", floor: "first-floor", x: 373, y: 415, description: "Office" },
+	  { name: "1104", floor: "first-floor", x: 330, y: 350, description: "PHD/MS student workstations" },
+	  { name: "1207", floor: "first-floor", x: 430, y: 280, description: "Medium collaborative classroom" },
+	  { name: "1108", floor: "first-floor", x: 260, y: 340, description: "Tutoring center" },
+	  { name: "1116", floor: "first-floor", x: 180, y: 310, description: "Large flat collaborative classroom" },
+	  { name: "1120", floor: "first-floor", x: 90, y: 220, description: "PHD/MS student workstations" },
+	  { name: "1124", floor: "first-floor", x: 37, y: 215, description: "Office" },
+	  { name: "1126", floor: "first-floor", x: 13, y: 197, description: "Office" },
+	  { name: "1128", floor: "first-floor", x: 20, y: 173, description: "Office" },
+	  { name: "1130", floor: "first-floor", x: 0, y: 153, description: "Office" },
+	  { name: "1132", floor: "first-floor", x: 0, y: 125, description: "Office" },
+	  { name: "1134", floor: "first-floor", x: 20, y: 95, description: "Small conference room" },
+	  { name: "1137", floor: "first-floor", x: 40, y: 70, description: "Huddle room" },
+	  { name: "1141", floor: "first-floor", x: 70, y: 43, description: "Office" },
+	  { name: "1139", floor: "first-floor", x: 35, y: 45, description: "Office" },
+	  { name: "1126", floor: "first-floor", x: 110, y: 105, description: "Workroom/supply storage" },
+	  { name: "1127", floor: "first-floor", x: 85, y: 130, description: "Large conference room" },
+	  { name: "1151", floor: "first-floor", x: 170, y: 160, description: "Student organization storage" },
+	  { name: "1107", floor: "first-floor", x: 230, y: 230, description: "Tutoring center" },
+	  { name: "1119", floor: "first-floor", x: 210, y: 252, description: "Group advising room" },
+	  { name: "BR1", floor: "first-floor", x: 540, y: 282, description: "Womens bathroom" },
+	  { name: "BR1", floor: "first-floor", x: 540, y: 310, description: "Mens bathroom" },
+	  
+	  //{ name: "2136", floor: "second-floor", x: 85, y: 20, description: "Student Study Room" },
+	  { name: "2138", floor: "second-floor", x: 120, y: 0, description: "Office" },
+	  { name: "2140", floor: "second-floor", x: 157, y: 5, description: "Office" },
+	  { name: "2142", floor: "second-floor", x: 162, y: 30, description: "Office" },
+	  { name: "2144", floor: "second-floor", x: 197, y: 33, description: "Office" },
+	  { name: "2146", floor: "second-floor", x: 191, y: 58, description: "Office" },
+	  { name: "2148", floor: "second-floor", x: 226, y: 61, description: "Office" },
+	  { name: "2150", floor: "second-floor", x: 219, y: 86, description: "Office" },
+	  { name: "2152", floor: "second-floor", x: 254, y: 89, description: "Office" },
+	  { name: "2154", floor: "second-floor", x: 248, y: 114, description: "Office" },
+	  { name: "2156", floor: "second-floor", x: 283, y: 117, description: "Office" },
+	  { name: "2158", floor: "second-floor", x: 277, y: 142, description: "Office" },
+	  { name: "2160", floor: "second-floor", x: 311, y: 136, description: "Office" },
+	  { name: "2162", floor: "second-floor", x: 325, y: 159, description: "Office" },
+	  { name: "2164", floor: "second-floor", x: 355, y: 172, description: "Office" },
+	  { name: "2254", floor: "second-floor", x: 510, y: 195, description: "Office" },
+	  { name: "2250", floor: "second-floor", x: 552, y: 200, description: "Office" },
+	  { name: "2246", floor: "second-floor", x: 594, y: 205, description: "Office" },
+	  { name: "2242", floor: "second-floor", x: 636, y: 210, description: "Office" },
+	  { name: "2238", floor: "second-floor", x: 678, y: 215, description: "Office" },
+	  { name: "2234", floor: "second-floor", x: 720, y: 220, description: "Office" },
+	  { name: "2252", floor: "second-floor", x: 535, y: 177, description: "Office" },
+	  { name: "2248", floor: "second-floor", x: 577, y: 182, description: "Office" },
+	  { name: "2244", floor: "second-floor", x: 619, y: 187, description: "Office" },
+	  { name: "2240", floor: "second-floor", x: 661, y: 192, description: "Office" },
+	  { name: "2236", floor: "second-floor", x: 703, y: 197, description: "Office" },
+	  { name: "2210", floor: "second-floor", x: 516, y: 395, description: "Office" },
+	  { name: "2214", floor: "second-floor", x: 558, y: 395, description: "Office" },
+	  { name: "2218", floor: "second-floor", x: 600, y: 395, description: "Office" },
+	  { name: "2222", floor: "second-floor", x: 642, y: 395, description: "Office" },
+	  { name: "2226", floor: "second-floor", x: 684, y: 395, description: "Office" },
+	  { name: "2208", floor: "second-floor", x: 495, y: 415, description: "Huddle room" },
+	  { name: "2212", floor: "second-floor", x: 537, y: 415, description: "Office" },
+	  { name: "2216", floor: "second-floor", x: 579, y: 415, description: "Office" },
+	  { name: "2220", floor: "second-floor", x: 621, y: 415, description: "Office" },
+	  { name: "2224", floor: "second-floor", x: 663, y: 415, description: "Office" },
+	  { name: "2228", floor: "second-floor", x: 705, y: 415, description: "Office" },
+	  { name: "2237", floor: "second-floor", x: 655, y: 310, description: "Specialized research lab" },
+	  { name: "2223", floor: "second-floor", x: 610, y: 300, description: "Specialized research lab" },
+	  { name: "2207", floor: "second-floor", x: 440, y: 300, description: "Medium collaborative classroom" },
+	  //{ name: "2249", floor: "second-floor", x: 573, y: 301, description: "Special equipment/Tech storage" },
+	  //{ name: "2247", floor: "second-floor", x: 577, y: 277, description: "H/M workshop" },
+	  { name: "2107", floor: "second-floor", x: 280, y: 260, description: "Small collaborative classroom" },
+	  //{ name: "1214", floor: "second", x: 558, y: 395, description: "Office" },
+	  { name: "2206", floor: "second-floor", x: 415, y: 415, description: "Small conference room" },
+	  { name: "2204", floor: "second-floor", x: 394, y: 395, description: "Small conference room" },
+	  { name: "2202", floor: "second-floor", x: 373, y: 415, description: "Office" },
+	  { name: "2104", floor: "second-floor", x: 330, y: 350, description: "PHD/MS student workstations" },
+	  { name: "2108", floor: "second-floor", x: 260, y: 340, description: "PHD/MS student workstations" },
+	  { name: "2112", floor: "second-floor", x: 180, y: 310, description: "PHD/MS student workstations" },
+	  { name: "2116", floor: "second-floor", x: 140, y: 270, description: "PHD/MS student workstations" },
+	  { name: "2120", floor: "second-floor", x: 90, y: 220, description: "PHD/MS student workstations" },
+	  { name: "2124", floor: "second-floor", x: 37, y: 215, description: "Office" },
+	  { name: "2126", floor: "second-floor", x: 13, y: 197, description: "Office" },
+	  { name: "2128", floor: "second-floor", x: 20, y: 173, description: "Office" },
+	  { name: "2130", floor: "second-floor", x: 0, y: 153, description: "Office" },
+	  { name: "2132", floor: "second-floor", x: 0, y: 125, description: "Office" },
+	  { name: "2134", floor: "second-floor", x: 20, y: 95, description: "Small conference room" },
+	  { name: "2137", floor: "second-floor", x: 90, y: 100, description: "Large conference room" },
+	  { name: "2143", floor: "second-floor", x: 125, y: 105, description: "Small conference room" },
+	  { name: "2109", floor: "second-floor", x: 235, y: 235, description: "Technician workroom" },
+	  { name: "2119", floor: "second-floor", x: 180, y: 235, description: "Student study room" },
+	  { name: "2117", floor: "second-floor", x: 195, y: 217, description: "Huddle room" },
+	  { name: "2115", floor: "second-floor", x: 210, y: 200, description: "Huddle room" },
+	  { name: "2113", floor: "second-floor", x: 225, y: 185, description: "Huddle room" },
+	  { name: "BR2", floor: "second-floor", x: 540, y: 282, description: "Womens bathroom" },
+	  { name: "BR2", floor: "second-floor", x: 540, y: 310, description: "Mens bathroom" },
+	  
+	  { name: "3138", floor: "third-floor", x: 120, y: 0, description: "Office" },
+	  { name: "3140", floor: "third-floor", x: 157, y: 5, description: "Office" },
+	  { name: "3142", floor: "third-floor", x: 162, y: 30, description: "Office" },
+	  { name: "3144", floor: "third-floor", x: 197, y: 33, description: "Office" },
+	  { name: "3146", floor: "third-floor", x: 191, y: 58, description: "Office" },
+	  { name: "3148", floor: "third-floor", x: 226, y: 61, description: "Office" },
+	  { name: "3150", floor: "third-floor", x: 219, y: 86, description: "Office" },
+	  { name: "3152", floor: "third-floor", x: 254, y: 89, description: "Office" },
+	  { name: "3154", floor: "third-floor", x: 248, y: 114, description: "Office" },
+	  { name: "3156", floor: "third-floor", x: 283, y: 117, description: "Office" },
+	  { name: "3158", floor: "third-floor", x: 277, y: 142, description: "Office" },
+	  { name: "3160", floor: "third-floor", x: 311, y: 136, description: "Office" },
+	  { name: "3162", floor: "third-floor", x: 325, y: 159, description: "Office" },
+	  { name: "3164", floor: "third-floor", x: 355, y: 172, description: "Office" },
+	  { name: "3254", floor: "third-floor", x: 510, y: 195, description: "Office" },
+	  { name: "3250", floor: "third-floor", x: 552, y: 200, description: "Office" },
+	  { name: "3246", floor: "third-floor", x: 594, y: 205, description: "Office" },
+	  { name: "3242", floor: "third-floor", x: 636, y: 210, description: "Office" },
+	  { name: "3238", floor: "third-floor", x: 678, y: 215, description: "Office" },
+	  { name: "3234", floor: "third-floor", x: 720, y: 220, description: "Office" },
+	  { name: "3252", floor: "third-floor", x: 535, y: 177, description: "Office" },
+	  { name: "3248", floor: "third-floor", x: 577, y: 182, description: "Office" },
+	  { name: "3244", floor: "third-floor", x: 619, y: 187, description: "Office" },
+	  { name: "3240", floor: "third-floor", x: 661, y: 192, description: "Office" },
+	  { name: "3236", floor: "third-floor", x: 703, y: 197, description: "Office" },
+	  { name: "3210", floor: "third-floor", x: 516, y: 395, description: "Office" },
+	  { name: "3214", floor: "third-floor", x: 558, y: 395, description: "Office" },
+	  { name: "3218", floor: "third-floor", x: 600, y: 395, description: "Office" },
+	  { name: "3222", floor: "third-floor", x: 642, y: 395, description: "Office" },
+	  { name: "3226", floor: "third-floor", x: 684, y: 395, description: "Huddle room" },
+	  { name: "3208", floor: "third-floor", x: 495, y: 415, description: "Technology/Classroom support office" }, //!
+	  { name: "3212", floor: "third-floor", x: 537, y: 415, description: "Office" },
+	  { name: "3216", floor: "third-floor", x: 579, y: 415, description: "Office" },
+	  { name: "3220", floor: "third-floor", x: 621, y: 415, description: "Office" },
+	  { name: "3224", floor: "third-floor", x: 663, y: 415, description: "Office" },
+	  { name: "3228", floor: "third-floor", x: 705, y: 415, description: "Office" },
+	  { name: "3237", floor: "third-floor", x: 655, y: 310, description: "Specialized research lab" },
+	  { name: "3223", floor: "third-floor", x: 610, y: 300, description: "Specialized research lab" },
+	  { name: "3207", floor: "third-floor", x: 440, y: 300, description: "Research maker lab" }, //!
+	  { name: "3256", floor: "third-floor", x: 420, y: 220, description: "Conference room" }, //!
+	  { name: "3107", floor: "third-floor", x: 280, y: 260, description: "Human robotic interactive lab" }, //!
+	  { name: "3206", floor: "third-floor", x: 415, y: 415, description: "Small conference room" },
+	  { name: "3204", floor: "third-floor", x: 394, y: 395, description: "Small conference room" },
+	  { name: "3202", floor: "third-floor", x: 373, y: 415, description: "Office" },
+	  { name: "3104", floor: "third-floor", x: 330, y: 350, description: "PHD/MS student workstations" },
+	  { name: "3108", floor: "third-floor", x: 260, y: 340, description: "PHD/MS student workstations" },
+	  { name: "3112", floor: "third-floor", x: 180, y: 310, description: "PHD/MS student workstations" },
+	  { name: "3116", floor: "third-floor", x: 140, y: 270, description: "PHD/MS student workstations" },
+	  { name: "3120", floor: "third-floor", x: 90, y: 220, description: "PHD/MS student workstations" },
+	  { name: "3124", floor: "third-floor", x: 37, y: 215, description: "Office" },
+	  { name: "3126", floor: "third-floor", x: 13, y: 197, description: "Office" },
+	  { name: "3128", floor: "third-floor", x: 20, y: 173, description: "Office" },
+	  { name: "3130", floor: "third-floor", x: 0, y: 153, description: "Office" },
+	  { name: "3132", floor: "third-floor", x: 0, y: 125, description: "Reception/Waiting" }, //!
+	  { name: "3134", floor: "third-floor", x: 20, y: 95, description: "Office" },
+	  { name: "3137", floor: "third-floor", x: 90, y: 100, description: "Large conference room" },
+	  { name: "3145", floor: "third-floor", x: 125, y: 105, description: "Kitchen" },
+	  { name: "3109", floor: "third-floor", x: 235, y: 235, description: "Technician workroom" },
+	  { name: "3119", floor: "third-floor", x: 180, y: 235, description: "Small conference room" },
+	  { name: "3117", floor: "third-floor", x: 195, y: 217, description: "Huddle room" },
+	  { name: "3115", floor: "third-floor", x: 210, y: 200, description: "Huddle room" },
+	  { name: "3113", floor: "third-floor", x: 225, y: 185, description: "Huddle room" },
+	  { name: "BR3", floor: "third-floor", x: 540, y: 282, description: "Womens bathroom" },
+	  { name: "BR3", floor: "third-floor", x: 540, y: 310, description: "Mens bathroom" },
+	  
+	  { name: "4138", floor: "fourth-floor", x: 120, y: 0, description: "Office" },
+	  { name: "4140", floor: "fourth-floor", x: 157, y: 5, description: "Office" },
+	  { name: "4142", floor: "fourth-floor", x: 162, y: 30, description: "Office" },
+	  { name: "4144", floor: "fourth-floor", x: 197, y: 33, description: "Office" },
+	  { name: "4146", floor: "fourth-floor", x: 191, y: 58, description: "Office" },
+	  { name: "4148", floor: "fourth-floor", x: 226, y: 61, description: "Office" },
+	  { name: "4150", floor: "fourth-floor", x: 219, y: 86, description: "Office" },
+	  { name: "4152", floor: "fourth-floor", x: 254, y: 89, description: "Office" },
+	  { name: "4154", floor: "fourth-floor", x: 248, y: 114, description: "Office" },
+	  { name: "4156", floor: "fourth-floor", x: 283, y: 117, description: "Office" },
+	  { name: "4158", floor: "fourth-floor", x: 277, y: 142, description: "Office" },
+	  { name: "4160", floor: "fourth-floor", x: 311, y: 136, description: "Office" },
+	  { name: "4162", floor: "fourth-floor", x: 325, y: 159, description: "Office" },
+	  { name: "4164", floor: "fourth-floor", x: 355, y: 172, description: "Office" },
+	  { name: "4254", floor: "fourth-floor", x: 510, y: 195, description: "Office" },
+	  { name: "4250", floor: "fourth-floor", x: 552, y: 200, description: "Office" },
+	  { name: "4246", floor: "fourth-floor", x: 594, y: 205, description: "Office" },
+	  { name: "4242", floor: "fourth-floor", x: 636, y: 210, description: "Office" },
+	  { name: "4238", floor: "fourth-floor", x: 678, y: 215, description: "Office" },
+	  { name: "4234", floor: "fourth-floor", x: 720, y: 220, description: "Office" },
+	  { name: "4252", floor: "fourth-floor", x: 535, y: 177, description: "Office" },
+	  { name: "4248", floor: "fourth-floor", x: 577, y: 182, description: "Office" },
+	  { name: "4244", floor: "fourth-floor", x: 619, y: 187, description: "Office" },
+	  { name: "4240", floor: "fourth-floor", x: 661, y: 192, description: "Office" },
+	  { name: "4236", floor: "fourth-floor", x: 703, y: 197, description: "Office" },
+	  { name: "4210", floor: "fourth-floor", x: 516, y: 395, description: "Office" },
+	  { name: "4214", floor: "fourth-floor", x: 558, y: 395, description: "Office" },
+	  { name: "4218", floor: "fourth-floor", x: 600, y: 395, description: "Office" },
+	  { name: "4222", floor: "fourth-floor", x: 642, y: 395, description: "Office" },
+	  { name: "4226", floor: "fourth-floor", x: 684, y: 395, description: "Huddle room" },
+	  { name: "4208", floor: "fourth-floor", x: 495, y: 415, description: "Technology/Classroom support office" }, //!
+	  { name: "4212", floor: "fourth-floor", x: 537, y: 415, description: "Office" },
+	  { name: "4216", floor: "fourth-floor", x: 579, y: 415, description: "Office" },
+	  { name: "4220", floor: "fourth-floor", x: 621, y: 415, description: "Office" },
+	  { name: "4224", floor: "fourth-floor", x: 663, y: 415, description: "Office" },
+	  { name: "4228", floor: "fourth-floor", x: 705, y: 415, description: "Office" },
+	  { name: "4237", floor: "fourth-floor", x: 655, y: 310, description: "Specialized research lab" },
+	  { name: "4223", floor: "fourth-floor", x: 610, y: 300, description: "Specialized research lab" },
+	  { name: "4207", floor: "fourth-floor", x: 440, y: 300, description: "Motion capture lab" }, //!
+	  { name: "4105", floor: "fourth-floor", x: 280, y: 260, description: "Large seminar room" }, //!
+	  { name: "4206", floor: "fourth-floor", x: 415, y: 415, description: "Small conference room" },
+	  { name: "4204", floor: "fourth-floor", x: 394, y: 395, description: "Small conference room" },
+	  { name: "4202", floor: "fourth-floor", x: 373, y: 415, description: "Office" },
+	  { name: "4104", floor: "fourth-floor", x: 330, y: 350, description: "PHD/MS student workstations" },
+	  { name: "4108", floor: "fourth-floor", x: 260, y: 340, description: "PHD/MS student workstations" },
+	  { name: "4112", floor: "fourth-floor", x: 180, y: 310, description: "PHD/MS student workstations" },
+	  { name: "4116", floor: "fourth-floor", x: 140, y: 270, description: "PHD/MS student workstations" },
+	  { name: "4120", floor: "fourth-floor", x: 90, y: 220, description: "PHD/MS student workstations" },
+	  { name: "4124", floor: "fourth-floor", x: 37, y: 215, description: "Office" },
+	  { name: "4126", floor: "fourth-floor", x: 13, y: 197, description: "Office" },
+	  { name: "4128", floor: "fourth-floor", x: 20, y: 173, description: "Office" },
+	  { name: "4130", floor: "fourth-floor", x: 0, y: 153, description: "Office" },
+	  { name: "4132", floor: "fourth-floor", x: 0, y: 125, description: "Reception/Waiting" }, //!
+	  { name: "4134", floor: "fourth-floor", x: 20, y: 95, description: "Small conference room" },
+	  { name: "4137", floor: "fourth-floor", x: 90, y: 100, description: "Large conference room" },
+	  { name: "4143", floor: "fourth-floor", x: 125, y: 105, description: "Small conference room" }, //!
+	  { name: "4109", floor: "fourth-floor", x: 245, y: 220, description: "Small seminar room" },
+	  { name: "4107", floor: "fourth-floor", x: 225, y: 250, description: "Small seminar room" },
+	  { name: "4119", floor: "fourth-floor", x: 180, y: 235, description: "Student study room" },
+	  { name: "4117", floor: "fourth-floor", x: 195, y: 217, description: "Huddle room" },
+	  { name: "4115", floor: "fourth-floor", x: 210, y: 200, description: "Huddle room" },
+	  { name: "4113", floor: "fourth-floor", x: 225, y: 185, description: "Huddle room" },
+	  { name: "BR4", floor: "fourth-floor", x: 540, y: 282, description: "Womens bathroom" },
+	  { name: "BR4", floor: "fourth-floor", x: 540, y: 310, description: "Mens bathroom" },
+	  
+	  { name: "5138", floor: "fifth-floor", x: 120, y: 0, description: "Office" },
+	  { name: "5140", floor: "fifth-floor", x: 157, y: 5, description: "Office" },
+	  { name: "5142", floor: "fifth-floor", x: 162, y: 30, description: "Office" },
+	  { name: "5144", floor: "fifth-floor", x: 197, y: 33, description: "Office" },
+	  { name: "5146", floor: "fifth-floor", x: 191, y: 58, description: "Office" },
+	  { name: "5148", floor: "fifth-floor", x: 226, y: 61, description: "Office" },
+	  { name: "5150", floor: "fifth-floor", x: 219, y: 86, description: "Office" },
+	  { name: "5152", floor: "fifth-floor", x: 254, y: 89, description: "Office" },
+	  { name: "5154", floor: "fifth-floor", x: 248, y: 114, description: "Office" },
+	  { name: "5156", floor: "fifth-floor", x: 283, y: 117, description: "Office" },
+	  { name: "5158", floor: "fifth-floor", x: 277, y: 142, description: "Office" },
+	  { name: "5160", floor: "fifth-floor", x: 311, y: 136, description: "Office" },
+	  { name: "5162", floor: "fifth-floor", x: 325, y: 159, description: "Office" },
+	  { name: "5164", floor: "fifth-floor", x: 355, y: 172, description: "Office" },
+	  { name: "5254", floor: "fifth-floor", x: 510, y: 195, description: "Office" },
+	  { name: "5250", floor: "fifth-floor", x: 552, y: 200, description: "Office" },
+	  { name: "5246", floor: "fifth-floor", x: 594, y: 205, description: "Office" },
+	  { name: "5242", floor: "fifth-floor", x: 636, y: 210, description: "Office" },
+	  { name: "5238", floor: "fifth-floor", x: 678, y: 215, description: "Office" },
+	  { name: "5234", floor: "fifth-floor", x: 720, y: 220, description: "Office" },
+	  { name: "5252", floor: "fifth-floor", x: 535, y: 177, description: "Office" },
+	  { name: "5248", floor: "fifth-floor", x: 577, y: 182, description: "Office" },
+	  { name: "5244", floor: "fifth-floor", x: 619, y: 187, description: "Office" },
+	  { name: "5240", floor: "fifth-floor", x: 661, y: 192, description: "Office" },
+	  { name: "5236", floor: "fifth-floor", x: 703, y: 197, description: "Office" },
+	  { name: "5210", floor: "fifth-floor", x: 516, y: 395, description: "Office" },
+	  { name: "5214", floor: "fifth-floor", x: 558, y: 395, description: "Office" },
+	  { name: "5218", floor: "fifth-floor", x: 600, y: 395, description: "Office" },
+	  { name: "5222", floor: "fifth-floor", x: 642, y: 395, description: "Office" },
+	  { name: "5226", floor: "fifth-floor", x: 684, y: 395, description: "Huddle room" },
+	  { name: "5208", floor: "fifth-floor", x: 495, y: 415, description: "Technology/Classroom support office" }, //!
+	  { name: "5212", floor: "fifth-floor", x: 537, y: 415, description: "Office" },
+	  { name: "5216", floor: "fifth-floor", x: 579, y: 415, description: "Office" },
+	  { name: "5220", floor: "fifth-floor", x: 621, y: 415, description: "Office" },
+	  { name: "5224", floor: "fifth-floor", x: 663, y: 415, description: "Office" },
+	  { name: "5228", floor: "fifth-floor", x: 705, y: 415, description: "Office" },
+	  { name: "5237", floor: "fifth-floor", x: 655, y: 310, description: "Specialized research lab" },
+	  { name: "5223", floor: "fifth-floor", x: 610, y: 300, description: "Specialized research lab" },
+	  { name: "5207", floor: "fifth-floor", x: 440, y: 300, description: "Research maker lab" }, //!
+	  { name: "5105", floor: "fifth-floor", x: 280, y: 285, description: "Small seminar room" }, //!
+	  { name: "5165", floor: "fifth-floor", x: 300, y: 255, description: "Large conference room" }, //!
+	  { name: "5206", floor: "fifth-floor", x: 415, y: 415, description: "Small conference room" },
+	  { name: "5204", floor: "fifth-floor", x: 394, y: 395, description: "Small conference room" },
+	  { name: "5202", floor: "fifth-floor", x: 373, y: 415, description: "Office" },
+	  { name: "5104", floor: "fifth-floor", x: 330, y: 350, description: "Cybersecurity student workstations" },
+	  { name: "5108", floor: "fifth-floor", x: 260, y: 340, description: "Cybersecurity student workstations" },
+	  { name: "5112", floor: "fifth-floor", x: 180, y: 310, description: "PHD/MS student workstations" },
+	  { name: "5116", floor: "fifth-floor", x: 140, y: 270, description: "PHD/MS student workstations" },
+	  { name: "5120", floor: "fifth-floor", x: 90, y: 220, description: "PHD/MS student workstations" },
+	  { name: "5124", floor: "fifth-floor", x: 37, y: 215, description: "Office" },
+	  { name: "5126", floor: "fifth-floor", x: 13, y: 197, description: "Office" },
+	  { name: "5128", floor: "fifth-floor", x: 20, y: 173, description: "Office" },
+	  { name: "5130", floor: "fifth-floor", x: 0, y: 153, description: "Office" },
+	  { name: "5132", floor: "fifth-floor", x: 0, y: 125, description: "Reception/Waiting" }, //!
+	  { name: "5134", floor: "fifth-floor", x: 20, y: 95, description: "Office" },
+	  { name: "5137", floor: "fifth-floor", x: 90, y: 100, description: "Large conference room" },
+	  { name: "5145", floor: "fifth-floor", x: 125, y: 105, description: "Secure file storage" },
+	  { name: "5161", floor: "fifth-floor", x: 255, y: 230, description: "Large cybersecurity collaboration room" },
+	  { name: "5107", floor: "fifth-floor", x: 235, y: 260, description: "Large conference room" },
+	  { name: "5119", floor: "fifth-floor", x: 180, y: 235, description: "Small conference room" },
+	  { name: "5117", floor: "fifth-floor", x: 195, y: 217, description: "Huddle room" },
+	  { name: "5115", floor: "fifth-floor", x: 210, y: 200, description: "Huddle room" },
+	  { name: "5113", floor: "fifth-floor", x: 225, y: 185, description: "Huddle room" },
+	  { name: "5256", floor: "fifth-floor", x: 420, y: 220, description: "Office" },
+	  { name: "BR5", floor: "fifth-floor", x: 540, y: 282, description: "Womens bathroom" },
+	  { name: "BR5", floor: "fifth-floor", x: 540, y: 310, description: "Mens bathroom" },
+	];
+
+
+  const mapElement = document.getElementById("map");
+  const floorSelect = document.getElementById("floor-select");
+  const searchButton = document.getElementById("search-button");
+  const descriptionBox = document.getElementById("description-box");
+
+  
+  descriptionBox.style.display = "block";
+  descriptionBox.innerHTML = "Click a room to view its description."
+
+
+
+  let currentFloor = floorSelect.value;
+  
+  // Set the initial background image
+  map.style.backgroundImage = `url(${floorSelect.options[floorSelect.selectedIndex].dataset.image})`;
+
+  // Handle floor selection
+  floorSelect.addEventListener("change", () => {
+    currentFloor = floorSelect.value;
+    map.style.backgroundImage = `url(${floorSelect.options[floorSelect.selectedIndex].dataset.image})`;
+	if (prevFoundRoomElement) {
+		prevFoundRoomElement.style.backgroundColor = '';}
+	updateMap();
+  });
+
+  function updateMap() {
+  
+	map.style.backgroundImage = `url(${floorSelect.options[floorSelect.selectedIndex].dataset.image})`;
+	
+    // remove all rooms from the map
+// keep track of the currently selected room
+let selectedRoom = null;
+
+// remove all existing room elements
+const roomElements = document.getElementsByClassName("room");
+while (roomElements.length > 0) {
+  roomElements[0].parentNode.removeChild(roomElements[0]);
+}
+
+// add rooms for the current floor
+const currentRooms = rooms.filter(room => room.floor === currentFloor);
+currentRooms.forEach(room => {
+  const roomElement = document.createElement("div");
+  roomElement.className = "room";
+  roomElement.style.left = `${room.x}px`;
+  roomElement.style.top = `${room.y}px`;
+  roomElement.textContent = room.name;
+  roomElement.style.textAlign = "center";
+  if (room.description.toLowerCase() === "huddle room") {
+	roomElement.style.backgroundColor = "#cbe2aa";
+  }
+  
+  
+  roomElement.addEventListener('click', () => {
+    // remove the selected class from the previously selected room
+    if (selectedRoom !== null) {
+      selectedRoom.classList.remove("selected");
+    }
+    // set the currently selected room and update its border color
+    selectedRoom = roomElement;
+    selectedRoom.classList.add("selected");
+
+    descriptionBox.innerHTML = room.description;
+    if (room.description.toLowerCase() === "huddle room") {
+      descriptionBox.innerHTML = room.description ;
+      const reserveButton = document.createElement("button");
+      reserveButton.textContent = "Reserve";
+      reserveButton.addEventListener("click", () => {
+        alert(`You have reserved ${room.name}!`);
+      });
+      descriptionBox.appendChild(reserveButton);
+    }
+  });
+  mapElement.appendChild(roomElement);
+});
+
+  }
+ 
+	 
+let prevFoundRoomElement;
+
+
+	// Select the search input and suggestions list
+const searchInput = document.getElementById("search-input");
+const suggestionsList = document.getElementById("suggestions-list");
+
+// Add an event listener to the search input that listens for changes in the input value
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  const matchingRooms = rooms.filter(room => {
+    const nameMatches = room.name.toLowerCase().includes(query);
+    const descriptionMatches = room.description.toLowerCase().includes(query);
+    return nameMatches || descriptionMatches;
+  });
+
+  // Clear the current contents of the suggestions list
+  suggestionsList.innerHTML = "";
+
+  // If there are matching rooms, generate a list of suggestions based on the room names
+  if (matchingRooms.length > 0) {
+
+	const suggestionItems = matchingRooms.slice(0, 5).map(room => `<li class="suggestion-item" data-id="${room.name}">${room.name} - ${room.description}</li>`);
+
+    suggestionsList.innerHTML = suggestionItems.join("");
+
+    // Add event listeners to the suggestion items
+    const suggestionItemsList = suggestionsList.querySelectorAll("li");
+    suggestionItemsList.forEach(item => {
+      item.addEventListener("click", () => {
+        const roomId = item.getAttribute("data-id");
+        const selectedRoom = rooms.find(room => room.name === roomId);
+        floorSelect.value = selectedRoom.floor;
+        currentFloor = floorSelect.value;
+        updateMap();
+        if (prevFoundRoomElement) {
+          prevFoundRoomElement.style.backgroundColor = "";
+        }
+        const foundRoomElement = document.createElement("div");
+        foundRoomElement.id = "found-room";
+        foundRoomElement.style.backgroundColor = "#e21833";
+        foundRoomElement.style.position = "absolute";
+        foundRoomElement.style.left = selectedRoom.x + "px";
+        foundRoomElement.style.top = selectedRoom.y + "px";
+        foundRoomElement.style.width = "35px";
+        foundRoomElement.style.height = "26px";
+        foundRoomElement.style.borderRadius = "50%";
+        foundRoomElement.style.zIndex = "2";
+        foundRoomElement.style.opacity = "0.4";
+        foundRoomElement.style.pointerEvents = "none";
+        document.getElementById("map").appendChild(foundRoomElement);
+        prevFoundRoomElement = foundRoomElement;
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    });
+  }
+});
+
+
+// Define the searchRooms function
+function searchRooms() {
+  const query = searchInput.value.toLowerCase();
+  const matchingRooms = rooms.filter(room => {
+    const nameMatches = room.name.toLowerCase().includes(query);
+    const descriptionMatches = room.description.toLowerCase().includes(query);
+    return nameMatches || descriptionMatches;
+  });
+  if (matchingRooms.length > 0 && matchingRooms.length < 999) {
+    const firstMatchingRoom = matchingRooms[0];
+    floorSelect.value = firstMatchingRoom.floor;
+    currentFloor = floorSelect.value;
+    updateMap();
+	
+	if (prevFoundRoomElement) {
+		prevFoundRoomElement.style.backgroundColor = '';}
+		const foundRoomElement = document.createElement('div');
+		foundRoomElement.id = 'found-room';
+		foundRoomElement.style.backgroundColor = "#e21833";
+		foundRoomElement.style.position = 'absolute';
+		foundRoomElement.style.left = firstMatchingRoom.x + 'px';
+		foundRoomElement.style.top = firstMatchingRoom.y + 'px';
+		foundRoomElement.style.width = '35px';
+		foundRoomElement.style.height = '26px';
+		foundRoomElement.style.borderRadius = "50%";
+		foundRoomElement.style.zIndex = '2';
+		foundRoomElement.style.opacity = '0.4';
+		foundRoomElement.style.pointerEvents = "none";
+		document.getElementById('map').appendChild(foundRoomElement);
+		prevFoundRoomElement = foundRoomElement;
+    
+    window.scrollTo(0, document.body.scrollHeight);
+    
+  }
+  else {
+    alert('Room not found');
+  }
+}	
+	
+  // initialize the map
+  updateMap();
+
+  // add event listeners
+  
+  searchButton.addEventListener("click", searchRooms);
+
+  searchInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      searchRooms();
+    }
+  });
+  
+  searchInput.addEventListener("input", event => {
+    if(searchInput.value === ""){
+		suggestionsList.innerHTML = "";
+	}
+  });
+ 
+	  
+	  
+</script>
+</body>
+</html>
