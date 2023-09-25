@@ -1,0 +1,62 @@
+<html>
+    <link rel="stylesheet" href="Tab4.css">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Profile</title>
+
+        <div class="topnav">
+            <a href="Tab1.html">Text</a>
+            <a class="active" href="Tab2.html">Choices</a>
+            <a href="Tab3.html">To Do</a>
+            <a href="Tab4.html">Profile</a>
+            <a href="Tab5.html">Colors</a>
+            <a href="Tab6.html">Lower Right</a>
+        </div>
+
+        
+    </head>
+    
+
+<body style="background-color: pink;">
+<div class = 'main'>
+    <h1>Choices</h1>
+    <div>Hat color to place on Player One's Head:</div>
+    <input type="radio" id="red" name="hat_color" value="Red">
+    <label for="red">Red</label><br>
+    <input type="radio" id="blue" name="hat_color" value="Blue">
+    <label for=" blue">Blue</label><br>
+    <div>Hat color to place on Player Two's Head:</div>
+    <select name="p2" id="p2">
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+    </select>
+    <br>
+    <br>
+    <!-- My Button -->
+    <button id="MyButton">Click Me!</button>
+    <br>
+    <textarea id="MyText" style="background-color: white; resize: none;" rows="3" cols="50">
+    </textarea>
+</div>
+<style></style></body>
+</html>
+
+<script>
+    //Select button by id
+    const MyButton = document.getElementById('MyButton');
+    //Add on click listener for button
+    MyButton.addEventListener('click', function() {
+        //Select (h1) heading by id, and then change it's value to (bananas)
+        if(document.getElementById('red').checked) {
+            p1 = document.getElementById('red').value
+        } else if(document.getElementById('blue').checked) {
+            p1 = document.getElementById('blue').value
+        } else {
+            p1 = "null"
+        }
+        
+        
+        p2 = document.getElementById('p2').value
+        document.getElementById('MyText').innerText = "        Player1: " + p1 + " Hat    Player2: " + p2 + " Hat"
+    })
+</script>
